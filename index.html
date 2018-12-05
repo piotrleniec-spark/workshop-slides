@@ -46,6 +46,116 @@
 						<img src="img/google-cloud-logo.png" width="250">
 					</div>
 				</section>
+				<section>
+					<a href="https://github.com/piotrleniec/active-storage-workshop" target="_blank" rel="noopener">
+						https://github.com/piotrleniec/active-storage-workshop
+					</a>
+				</section>
+				<section>
+					Make sure that you have <u>imagemagick</u> installed!
+				</section>
+				<section>
+					<pre><code data-trim class="ruby">
+						class User < ApplicationRecord
+						  has_one_attached :avatar
+						end
+					</code></pre>
+				</section>
+				<section>
+					<pre><code data-trim class="ruby">
+						create_table "active_storage_attachments", force: :cascade do |t|
+						  t.string "name", null: false
+						  t.string "record_type", null: false
+						  t.integer "record_id", null: false
+						  t.integer "blob_id", null: false
+						  t.datetime "created_at", null: false
+						  t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+						  t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+						end
+					</code></pre>
+					<pre><code data-trim class="ruby">
+						create_table "active_storage_blobs", force: :cascade do |t|
+						  t.string "key", null: false
+						  t.string "filename", null: false
+						  t.string "content_type"
+						  t.text "metadata"
+						  t.bigint "byte_size", null: false
+						  t.string "checksum", null: false
+						  t.datetime "created_at", null: false
+						  t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+						end
+					</code></pre>
+				</section>
+				<section>
+					<pre><code data-trim class="ruby">
+						ActiveStorage::Attachment
+
+						# and
+
+						ActiveStorage::Blob
+					</code></pre>
+				</section>
+				<section>
+					<pre><code data-trim class="ruby">
+						<%= form.file_field :avatar %>
+					</code></pre>
+				</section>
+				<section>
+					<pre><code data-trim class="ruby">
+						class SignupController < ApplicationController
+						  def create
+						    user = User.create!(user_params)
+						    session[:user_id] = user.id
+						    redirect_to root_path
+						  end
+
+						  private
+
+						  def user_params
+						    params.require(:user).permit(:email_address,
+							                         :password,
+							                         :avatar)
+						  end
+						end
+					</code></pre>
+				</section>
+				<section>
+					<pre><code data-trim class="ruby">
+						user.avatar.attach(io: File.open(path), filename: 'hehe.png')
+					</code></pre>
+				</section>
+				<section>
+					<pre><code data-trim class="ruby">
+						user.avatar.purge
+
+						# or
+
+						user.avatar.purge_later
+					</code></pre>
+				</section>
+				<section>
+					<pre><code data-trim class="ruby">
+						class Message < ApplicationRecord
+						  has_many_attached :images
+						end
+					</code></pre>
+				</section>
+				<section>
+					<pre><code data-trim class="ruby">
+						<%= image_tag user.avatar.variant(resize_to_fit: [100, 100]) %>
+
+						# or
+
+
+						<%= user.avatar.variant(resize: '50x50') %>
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Direct cloud upload</h2>
+
+					<img src="img/direct-cloud-upload.png">
+				</section>
 			</div>
 		</div>
 
