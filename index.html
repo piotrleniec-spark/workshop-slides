@@ -25,6 +25,11 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
+					<a href="https://piotrleniec-spark.github.io/workshop-slides/" target="_blank" rel="noopener">
+						https://piotrleniec-spark.github.io/workshop-slides/
+					</a>
+				</section>
+				<section>
 					<img src="img/rails-logo.png" width="250">
 					<p>Active Storage</p>
 				</section>
@@ -47,8 +52,8 @@
 					</div>
 				</section>
 				<section>
-					<a href="https://github.com/piotrleniec/active-storage-workshop" target="_blank" rel="noopener">
-						https://github.com/piotrleniec/active-storage-workshop
+					<a href="https://github.com/piotrleniec-spark/active-storage-workshop" target="_blank" rel="noopener">
+						https://github.com/piotrleniec-spark/active-storage-workshop
 					</a>
 				</section>
 				<section>
@@ -120,6 +125,11 @@
 					</code></pre>
 				</section>
 				<section>
+					<h2>Task</h2>
+
+					Add background image to users and use it on all views.
+				</section>
+				<section>
 					<pre><code data-trim class="ruby">
 						user.avatar.attach(io: File.open(path), filename: 'hehe.png')
 					</code></pre>
@@ -132,6 +142,11 @@
 
 						user.avatar.purge_later
 					</code></pre>
+				</section>
+				<section>
+					<h2>Task</h2>
+
+					Add users to db/seeds.rb
 				</section>
 				<section>
 					<pre><code data-trim class="ruby">
@@ -150,7 +165,11 @@
 						<%= user.avatar.variant(resize: '50x50') %>
 					</code></pre>
 				</section>
+				<section>
+					<h2>Task</h2>
 
+					Check which approach works for you.
+				</section>
 				<section>
 					<h2>Direct cloud upload</h2>
 
