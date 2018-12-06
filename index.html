@@ -130,6 +130,28 @@
 					Add background image to users and use it on all views.
 				</section>
 				<section>
+					<h2>Task</h2>
+
+					Let's make avatar required and accept only jpg and png files.
+				</section>
+				<section>
+					<pre><code data-trim class="ruby">
+						class Item
+							has_one_attached :image
+
+							validate :validate_image
+
+							private
+
+						  def validate_image
+						    if image.attached? && %w[image/png image/jpg image/jpeg].include?(image.content_type)
+						      errors.add(:image, 'lol')
+						    end
+						  end
+						end
+					</code></pre>
+				</section>
+				<section>
 					<pre><code data-trim class="ruby">
 						user.avatar.attach(io: File.open(path), filename: 'hehe.png')
 					</code></pre>
@@ -174,6 +196,17 @@
 					<h2>Direct cloud upload</h2>
 
 					<img src="img/direct-cloud-upload.png">
+				</section>
+				<section>
+					<img src="img/rails-logo.png" width="250">
+					<p>Webpacker</p>
+				</section>
+				<section>
+					<h2>Install Node Version Manager</h2>
+
+					<a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">
+						https://github.com/creationix/nvm
+					</a>
 				</section>
 			</div>
 		</div>
